@@ -2,6 +2,7 @@
 
 class Example extends CI_Controller {
 
+	var $_list_id  = 'YOUR LIST ID HERE';
 	
 	function __construct()
 	{
@@ -18,15 +19,12 @@ class Example extends CI_Controller {
 	 *
 	 */
 	function index()
-	{
-		
-		$list_id = 'YOUR LIST ID HERE';
-		
+	{	
 		$subscriber = array(
 			'EmailAddress' => 'example@example.com',
 			'Name' => 'username'
 	    );
-		$result = $this->cmonitor->post_request('subscribers/'.$list_id.'.json', $subscriber);
+		$result = $this->cmonitor->post_request('subscribers/'.$this->_list_id.'.json', $subscriber);
 		if($result->was_successful())
 		{
 			echo 'yep all was good and this is what was returned '.$result->http_status_code;
@@ -34,7 +32,21 @@ class Example extends CI_Controller {
 		}
 	}
 	
-	
+	/*
+	 * 
+	 * Get an existing subscriber from a list
+	 *
+	 */
+	function get()
+	{
+		$email = 'example@example.com';
+		$result = $this->cmonitor->get_request('subscribers/'.$this->_list_id.'.json?email='.urlencode($email));
+		if($result->was_successful())
+		{
+			echo 'yep all was good and this is what was returned '.$result->http_status_code;
+			print_r($result);
+		}
+    }
 	
 }
 	
