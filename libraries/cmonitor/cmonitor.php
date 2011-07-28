@@ -13,6 +13,8 @@ define('CS_REST_WEBHOOK_FORMAT_XML', 'xml');
  * A general result object returned from all Createsend API calls.
  * @author tobyb
  *
+ * Updated to work with codeigniter 2.0 + by Matt Tullett @twelve20 
+ *
  */
 class CS_REST_Wrapper_Result {
     /**
